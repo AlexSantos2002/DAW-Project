@@ -1,0 +1,14 @@
+No backend em vez de utilizar nedb é utilizado sqlite, esta escolha deve-se ao facto de querermos usar uma
+bd simples, boa para pequenos projetos e que guardem a bd localmente num ficheiro.
+
+------------------Correção de possiveis erros ao iniciar o server-------------------
+Ao iniciar o server através do comando npm run dev as vezes aparece um erro por já ter um processo
+sendo rodado na porta 8081(porta que utilizamos), para corrigir isso basta escrever este comando:
+kill -9 $(lsof -t -i :8081) , antes de iniciar o server, assim o processo que está a decorrer na porta
+8081 será encerrado e podemos rodar o server normalmente sem nenhum erro.
+
+-----------------------------Notas para o que falta fazer do backend---------------------
+-----------------------------A ser apagado antes da entrega-----------------------------
+Falta fazer a conecção entre backend e front end, fazer mais um ou dois middlewares e adicionar mais
+uma tabela, porém o principal já está feito e falta começar a fazer o front end para testar. Após a
+implementação do front end é que se irá acabar de fazer as tabelas necessárias
