@@ -17,7 +17,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
         id INTEGER PRIMARY KEY,
         nome TEXT NOT NULL,
         email TEXT NOT NULL,
-        tipo TEXT NOT NULL CHECK (tipo IN ('cliente', 'pt'))
+        tipo TEXT NOT NULL
       )
     `);
   }
@@ -37,32 +37,37 @@ router.get("/", (req: Request, res: Response) => {
 
 // Adicionar um usuário
 router.post("/", (req: Request, res: Response) => {
-  const { id, nome, email, tipo } = req.body;
+  const { nome, email, tipo } = req.body;
 
-  // Validação dos campos
-  if (!id || !nome || !email || !tipo) {
-    res.status(400).send("ID, nome, email e tipo são obrigatórios.");
+  console.log("Dados recebidos no POST:", { nome, email, tipo });
+
+  // Validação dos campos obrigatórios
+  if (!nome || !email || !tipo) {
+    res.status(400).send("Nome, email e tipo são obrigatórios.");
     return;
   }
 
-  if (tipo !== "cliente" && tipo !== "pt") {
-    res.status(400).send('O campo "tipo" deve ser "cliente" ou "pt".');
-    return;
-  }
-
-  // Inserindo no banco de dados
-  const sql = "INSERT INTO usuarios (id, nome, email, tipo) VALUES (?, ?, ?, ?)";
-  db.run(sql, [id, nome, email, tipo], (err) => {
+  // Encontrar o maior ID na tabela
+  const getNextIdSql = "SELECT MAX(id) as maxId FROM usuarios";
+  db.get(getNextIdSql, [], (err, row: { maxId: number } | undefined) => {
     if (err) {
-      if (err.message.includes("UNIQUE")) {
-        res.status(400).send("Um usuário com este ID já existe.");
-      } else {
-        console.error("Erro ao adicionar usuário:", err.message);
-        res.status(500).send("Erro ao adicionar usuário.");
-      }
-    } else {
-      res.status(201).send("Usuário adicionado com sucesso.");
+      console.error("Erro ao buscar o próximo ID:", err.message);
+      res.status(500).send("Erro ao adicionar usuário.");
+      return;
     }
+
+    const nextId = (row?.maxId || 0) + 1;
+
+    // Inserir o novo usuário com o próximo ID
+    const insertSql = "INSERT INTO usuarios (id, nome, email, tipo) VALUES (?, ?, ?, ?)";
+    db.run(insertSql, [nextId, nome, email, tipo], (err) => {
+      if (err) {
+        console.error("Erro ao inserir no banco:", err.message);
+        res.status(500).send("Erro ao adicionar usuário.");
+      } else {
+        res.status(201).send(`Usuário adicionado com sucesso com ID: ${nextId}`);
+      }
+    });
   });
 });
 
