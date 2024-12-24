@@ -1,15 +1,19 @@
 import { createRouter, createWebHistory } from "vue-router";
-import home from "../views/home.vue"; // Certifique-se de que o arquivo existe
-import dashboard from "../views/dashboard.vue"; // Importa a view dashboard
+import Home from "../views/home.vue";
+import Dashboard from "../views/dashboard.vue";
+import About from "../views/about.vue";
+import Contact from "../views/contact.vue"; // Importa a nova página de Contatos
 
 const routes = [
-  { path: "/", name: "home", component: home }, // Rota inicial
-  { path: "/dashboard", name: "dashboard", component: dashboard }, // Rota para a dashboard
+  { path: "/", name: "home", component: Home },
+  { path: "/dashboard", name: "dashboard", component: Dashboard },
+  { path: "/about", name: "about", component: About },
+  { path: "/contact", name: "contact", component: Contact }, // Adiciona a rota para Contatos
 ];
 
 const router = createRouter({
-  history: createWebHistory(), // Usa o modo de histórico do navegador
+  history: createWebHistory(),
   routes,
 });
 
-export default router; // Exporta o roteador para ser usado no main.js
+export default router;
