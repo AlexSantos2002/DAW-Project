@@ -10,8 +10,58 @@
     </ul>
     <div class="auth-buttons">
       <button class="btn login-btn" @click="showLoginModal = true">Login</button>
-      <button class="btn register-btn" @click="register">Registrar</button>
+      <button class="btn register-btn" @click="showRegisterModal = true">Registrar</button>
     </div>
+<!-- Modal de Registro -->
+<div v-if="showRegisterModal" class="modal-overlay" @click.self="closeRegisterModal">
+  <div class="modal-content">
+    <h2>Registrar</h2>
+    <form @submit.prevent="handleRegister">
+      <div class="form-group">
+        <label for="name">Nome:</label>
+        <input
+          type="text"
+          id="name"
+          v-model="registerName"
+          placeholder="Digite seu nome"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="register-email">Email:</label>
+        <input
+          type="email"
+          id="register-email"
+          v-model="registerEmail"
+          placeholder="Digite seu email"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="register-password">Senha:</label>
+        <input
+          type="password"
+          id="register-password"
+          v-model="registerPassword"
+          placeholder="Digite sua senha"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="register-type">Tipo:</label>
+        <select id="register-type" v-model="registerType" required>
+          <option value="cliente">Cliente</option>
+          <option value="pt">Personal Trainer</option>
+        </select>
+      </div>
+      <div class="popup-buttons">
+        <button type="submit" class="btn register-modal-btn">Registrar</button>
+        <button type="button" class="btn cancel-modal-btn" @click="closeRegisterModal">Cancelar</button>
+      </div>
+    </form>
+    <p v-if="registerErrorMessage" class="error-message">{{ registerErrorMessage }}</p>
+  </div>
+</div>
 
     <!-- Modal de Login -->
     <div v-if="showLoginModal" class="modal-overlay" @click.self="closeModal">
@@ -54,21 +104,32 @@ export default {
   name: "Navbar",
   data() {
     return {
-      showLoginModal: false,
-      email: "",
-      password: "",
-      errorMessage: null,
+    showLoginModal: false,
+    showRegisterModal: false, // Adicionado para o modal de registro
+    email: "",
+    password: "",
+    registerName: "",
+    registerEmail: "",
+    registerPassword: "",
+    registerType: "cliente", // Padrão como cliente
+    errorMessage: null,
+    registerErrorMessage: null, // Mensagem de erro para o registro
     };
   },
   methods: {
-    register() {
-      alert("Função de Registro aqui!");
-    },
     closeModal() {
       this.showLoginModal = false;
       this.email = "";
       this.password = "";
       this.errorMessage = null;
+    },
+    closeRegisterModal() {
+      this.showRegisterModal = false; // Fecha o modal de registro
+      this.registerName = "";
+      this.registerEmail = "";
+      this.registerPassword = "";
+      this.registerType = "cliente";
+      this.registerErrorMessage = null;
     },
     async handleLogin() {
       try {
@@ -91,7 +152,32 @@ export default {
         console.error(error);
       }
     },
-  },
+    async handleRegister() {
+      try {
+        const response = await fetch("http://localhost:8081/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            nome: this.registerName,
+            email: this.registerEmail,
+            senha: this.registerPassword,
+            tipo: this.registerType,
+          }),
+        });
+
+        if (response.ok) {
+          alert("Usuário registrado com sucesso!");
+          this.closeRegisterModal();
+        } else {
+          const errorData = await response.json();
+          this.registerErrorMessage = errorData.message || "Erro no registro.";
+        }
+      } catch (error) {
+        this.registerErrorMessage = "Erro ao conectar ao servidor.";
+        console.error(error);
+      }
+    },
+  }, // Fim correto do objeto methods
 };
 </script>
 
