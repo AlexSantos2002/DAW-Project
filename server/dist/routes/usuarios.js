@@ -18,17 +18,18 @@ const db = new sqlite3_1.default.Database(dbPath, (err) => {
         // Cria a tabela se ela não existir
         db.run(`
       CREATE TABLE IF NOT EXISTS usuarios (
-        id INTEGER PRIMARY KEY,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
         nome TEXT NOT NULL,
         email TEXT NOT NULL,
-        tipo TEXT NOT NULL
+        tipo TEXT NOT NULL,
+        senha TEXT NOT NULL
       )
     `);
     }
 });
 // Listar usuários
 router.get("/", (req, res) => {
-    db.all("SELECT * FROM usuarios", [], (err, rows) => {
+    db.all("SELECT id, nome, email, tipo FROM usuarios", [], (err, rows) => {
         if (err) {
             console.error("Erro ao listar usuários:", err.message);
             res.status(500).send("Erro ao listar usuários.");
@@ -40,33 +41,27 @@ router.get("/", (req, res) => {
 });
 // Adicionar um usuário
 router.post("/", (req, res) => {
-    const { nome, email, tipo } = req.body;
-    console.log("Dados recebidos no POST:", { nome, email, tipo });
+    const { nome, email, tipo, senha } = req.body;
+    console.log("Dados recebidos no POST:", { nome, email, tipo, senha });
     // Validação dos campos obrigatórios
-    if (!nome || !email || !tipo) {
-        res.status(400).send("Nome, email e tipo são obrigatórios.");
+    if (!nome || !email || !tipo || !senha) {
+        res.status(400).send("Nome, email, tipo e senha são obrigatórios.");
         return;
     }
-    // Encontrar o maior ID na tabela
-    const getNextIdSql = "SELECT MAX(id) as maxId FROM usuarios";
-    db.get(getNextIdSql, [], (err, row) => {
+    if (senha.length < 6) {
+        res.status(400).send("A senha deve ter pelo menos 6 caracteres.");
+        return;
+    }
+    // Inserir o novo usuário
+    const insertSql = "INSERT INTO usuarios (nome, email, tipo, senha) VALUES (?, ?, ?, ?)";
+    db.run(insertSql, [nome, email, tipo, senha], function (err) {
         if (err) {
-            console.error("Erro ao buscar o próximo ID:", err.message);
+            console.error("Erro ao inserir no banco:", err.message);
             res.status(500).send("Erro ao adicionar usuário.");
-            return;
         }
-        const nextId = ((row === null || row === void 0 ? void 0 : row.maxId) || 0) + 1;
-        // Inserir o novo usuário com o próximo ID
-        const insertSql = "INSERT INTO usuarios (id, nome, email, tipo) VALUES (?, ?, ?, ?)";
-        db.run(insertSql, [nextId, nome, email, tipo], (err) => {
-            if (err) {
-                console.error("Erro ao inserir no banco:", err.message);
-                res.status(500).send("Erro ao adicionar usuário.");
-            }
-            else {
-                res.status(201).send(`Usuário adicionado com sucesso com ID: ${nextId}`);
-            }
-        });
+        else {
+            res.status(201).send(`Usuário adicionado com sucesso com ID: ${this.lastID}`);
+        }
     });
 });
 // Remover um usuário

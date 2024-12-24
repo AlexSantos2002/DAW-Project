@@ -12,3 +12,22 @@ kill -9 $(lsof -t -i :8081) , antes de iniciar o server, assim o processo que es
 Falta fazer a conecção entre backend e front end, fazer mais um ou dois middlewares e adicionar mais
 uma tabela, porém o principal já está feito e falta começar a fazer o front end para testar. Após a
 implementação do front end é que se irá acabar de fazer as tabelas necessárias
+
+--------------------------Comandos para utilizar a base de dados----------------------------
+Exemplo de comando par adicionar um contacto:
+curl -X POST http://localhost:8081/usuarios \
+  -H "Content-Type: application/json" \
+  -d '{
+    "nome": "João",
+    "email": "joao@email.com",
+    "tipo": "cliente",
+    "senha": "senha123"
+  }'
+
+Exemplo de comando para deletar um contacto:
+curl -X DELETE http://localhost:8081/usuarios/1
+Ou seja curl -X DELETE http://localhost:8081/usuarios/ID
+
+Exemplo de comando para listar todos os usuarios:
+curl -X GET http://localhost:8081/usuarios
+----------------------------------------------------------------------------------------------
