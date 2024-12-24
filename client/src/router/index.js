@@ -1,8 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/home.vue"; // Certifique-se de que este arquivo existe
+import home from "../views/home.vue"; // Certifique-se de que o arquivo existe
+import dashboard from "../views/dashboard.vue"; // Importa a view dashboard
 
 const routes = [
-  { path: "/", name: "Home", component: Home }, // Rota inicial
+  { path: "/", name: "home", component: home }, // Rota inicial
+  { path: "/dashboard", name: "dashboard", component: dashboard }, // Rota para a dashboard
 ];
 
 const router = createRouter({

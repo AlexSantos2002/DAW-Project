@@ -23,9 +23,8 @@ export default {
   color: #ecf0f1; /* Cor do texto */
   text-align: center;
   padding: 1rem;
-  position: fixed;
+  position: relative; /* Alterado para evitar sobreposição */
   bottom: 0;
-  left: 0;
   width: 100%; /* Ocupar toda a largura da tela */
   box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.2);
 }

@@ -132,26 +132,26 @@ export default {
       this.registerErrorMessage = null;
     },
     async handleLogin() {
-      try {
-        const response = await fetch("http://localhost:8081/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: this.email, senha: this.password }),
-        });
+  try {
+    const response = await fetch("http://localhost:8081/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: this.email, senha: this.password }),
+    });
 
-        if (response.ok) {
-          const data = await response.json();
-          alert(data.message); // Mostra a mensagem de sucesso
-          this.closeModal(); // Fecha o modal após login bem-sucedido
-        } else {
-          const errorData = await response.json();
-          this.errorMessage = errorData.message || "Erro no login.";
-        }
-      } catch (error) {
-        this.errorMessage = "Erro ao conectar ao servidor.";
-        console.error(error);
-      }
-    },
+    if (response.ok) {
+      const data = await response.json();
+      this.closeModal(); // Fecha o modal após login bem-sucedido
+      this.$router.push("/dashboard"); // Redireciona para o Dashboard
+    } else {
+      const errorData = await response.json();
+      this.errorMessage = errorData.message || "Erro no login.";
+    }
+  } catch (error) {
+    this.errorMessage = "Erro ao conectar ao servidor.";
+    console.error(error);
+  }
+},
     async handleRegister() {
       try {
         const response = await fetch("http://localhost:8081/register", {

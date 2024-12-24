@@ -1,20 +1,20 @@
 <template>
   <div id="app">
-    <Navbar /> <!-- Adiciona a navbar -->
-    <router-view /> <!-- Renderiza o conteúdo da rota atual -->
-    <Footer /> <!-- Adiciona o footer -->
+    <Navbar /> <!-- Navbar no topo -->
+    <router-view /> <!-- Conteúdo dinâmico das rotas -->
+    <Footer /> <!-- Footer fixo ao fim da página -->
   </div>
 </template>
 
 <script>
 import Navbar from "./components/navbar.vue";
-import Footer from "./components/footer.vue"; // Importa o footer
+import Footer from "./components/footer.vue";
 
 export default {
   name: "App",
   components: {
     Navbar,
-    Footer, // Declara o componente Footer
+    Footer,
   },
 };
 </script>
@@ -23,7 +23,7 @@ export default {
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  min-height: 100vh; /* Garante que o body ocupe a altura total da tela */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -31,10 +31,14 @@ body {
 #app {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Garante que o app ocupe a altura total */
+  min-height: 100vh;
 }
 
 router-view {
   flex: 1; /* Faz o conteúdo crescer e ocupar o espaço disponível */
+}
+
+footer {
+  margin-top: auto; /* Posiciona o footer no fim da página */
 }
 </style>
