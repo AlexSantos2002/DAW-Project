@@ -9,9 +9,16 @@
       <li><a href="/contact">Contato</a></li>
     </ul>
     <div class="auth-buttons">
-      <button class="btn login-btn" @click="showLoginModal = true">Login</button>
-      <button class="btn register-btn" @click="showRegisterModal = true">Registrar</button>
-    </div>
+  <template v-if="isLoggedIn">
+    <span class="user-name">Bem-vindo!</span>
+    <button class="btn logout-btn" @click="logout">Sair</button>
+  </template>
+  <template v-else>
+    <button class="btn login-btn" @click="showLoginModal = true">Login</button>
+    <button class="btn register-btn" @click="showRegisterModal = true">Registrar</button>
+  </template>
+</div>
+
 <!-- Modal de Registro -->
 <div v-if="showRegisterModal" class="modal-overlay" @click.self="closeRegisterModal">
   <div class="modal-content">
@@ -104,6 +111,7 @@ export default {
   name: "Navbar",
   data() {
     return {
+    isLoggedIn: false, // Estado de login
     showLoginModal: false,
     showRegisterModal: false, // Adicionado para o modal de registro
     email: "",
@@ -117,6 +125,11 @@ export default {
     };
   },
   methods: {
+    logout() {
+      this.isLoggedIn = false;
+      this.userName = "";
+    },
+
     closeModal() {
       this.showLoginModal = false;
       this.email = "";
@@ -141,17 +154,17 @@ export default {
 
     if (response.ok) {
       const data = await response.json();
-      this.closeModal(); // Fecha o modal após login bem-sucedido
-      this.$router.push("/dashboard"); // Redireciona para o Dashboard
+      this.isLoggedIn = true; // Define como logado
+      this.closeModal(); // Fecha o modal de login
     } else {
       const errorData = await response.json();
       this.errorMessage = errorData.message || "Erro no login.";
     }
-  } catch (error) {
+   } catch (error) {
     this.errorMessage = "Erro ao conectar ao servidor.";
     console.error(error);
-  }
-},
+   }
+  },
     async handleRegister() {
       try {
         const response = await fetch("http://localhost:8081/register", {
@@ -349,4 +362,21 @@ export default {
   color: #e74c3c;
   margin-top: 1rem;
 }
+/* Nome do usuário logado */
+.user-name {
+  margin-right: 10px;
+  font-size: 1rem;
+  color: #ecf0f1;
+}
+
+/* Botão de logout */
+.logout-btn {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.logout-btn:hover {
+  background-color: #c0392b;
+}
+
 </style>
