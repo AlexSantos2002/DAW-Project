@@ -4,7 +4,7 @@
     <p>Para mais informações, entre em contato conosco:</p>
     <ul>
       <li>Email: <a href="mailto:a71522@ualg.pt">a71522@ualg.pt</a></li>
-      <li>Telefone: <a href="tel:+351 936051611">(+351) 936051611</a></li>
+      <li>Telefone: <a href="tel:+351936051611">(+351) 936051611</a></li>
       <li>Endereço: Rua de Berlim, n79</li>
     </ul>
 
@@ -41,14 +41,19 @@ export default {
   },
   methods: {
     async handleSubmit() {
+      if (!this.email || !this.email.includes('@')) {
+        this.errorMessage = 'Por favor, insira um e-mail válido.';
+        return;
+      }
+
       try {
-        const response = await fetch('/api/send-email', {
+        const response = await fetch('http://localhost:8081/api/send-email', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             to: this.email,
             subject: 'Interesse em instalações físicas',
-            text: 'Gostaríamos de entrar em contato com você!',
+            text: 'Bem vindo ao Fitness HUb! Para utilizar das nossas instalações fisicas apenas necessita de se deslocar um dia cá para efetuar a reserva! Ficamos à sua espera!',
           }),
         });
 
@@ -115,15 +120,15 @@ export default {
 }
 
 .contact-message input {
-  width: 50%; /* Diminui a largura do input */
-  max-width: 400px; /* Limita o tamanho máximo */
+  width: 50%;
+  max-width: 400px;
   padding: 10px;
   margin: 10px auto;
   border: 1px solid #ccc;
-  border-radius: 8px; /* Cantos arredondados */
+  border-radius: 8px;
   font-size: 16px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra leve */
-  transition: box-shadow 0.3s ease, border-color 0.3s ease; /* Transição suave */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .contact-message input:focus {
