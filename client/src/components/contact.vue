@@ -4,7 +4,7 @@
     <p>Para mais informações, entre em contato conosco:</p>
     <ul>
       <li>Email: <a href="mailto:a71522@ualg.pt">a71522@ualg.pt</a></li>
-      <li>Telefone: <a href="tel:+5511999999999">(11) 99999-9999</a></li>
+      <li>Telefone: <a href="tel:+351 936051611">(+351) 936051611</a></li>
       <li>Endereço: Rua de Berlim, n79</li>
     </ul>
 
@@ -115,11 +115,21 @@ export default {
 }
 
 .contact-message input {
-  width: 100%;
+  width: 50%; /* Diminui a largura do input */
+  max-width: 400px; /* Limita o tamanho máximo */
   padding: 10px;
-  margin-bottom: 20px;
+  margin: 10px auto;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 8px; /* Cantos arredondados */
+  font-size: 16px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra leve */
+  transition: box-shadow 0.3s ease, border-color 0.3s ease; /* Transição suave */
+}
+
+.contact-message input:focus {
+  border-color: #3498db;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  outline: none;
 }
 
 .contact-message button {
@@ -129,10 +139,13 @@ export default {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .contact-message button:hover {
   background-color: #0056b3;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .success-message {
