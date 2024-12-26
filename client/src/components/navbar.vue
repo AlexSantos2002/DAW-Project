@@ -105,29 +105,30 @@
     </div>
   </nav>
 </template>
-
 <script>
 export default {
   name: "Navbar",
   data() {
     return {
-    isLoggedIn: false, // Estado de login
-    showLoginModal: false,
-    showRegisterModal: false, // Adicionado para o modal de registro
-    email: "",
-    password: "",
-    registerName: "",
-    registerEmail: "",
-    registerPassword: "",
-    registerType: "cliente", // Padrão como cliente
-    errorMessage: null,
-    registerErrorMessage: null, // Mensagem de erro para o registro
+      isLoggedIn: false, // Estado de login
+      showLoginModal: false,
+      showRegisterModal: false, // Adicionado para o modal de registro
+      email: "",
+      password: "",
+      registerName: "",
+      registerEmail: "",
+      registerPassword: "",
+      registerType: "cliente", // Padrão como cliente
+      errorMessage: null,
+      registerErrorMessage: null, // Mensagem de erro para o registro
     };
   },
   methods: {
     logout() {
       this.isLoggedIn = false;
       this.userName = "";
+      // Opcionalmente, redirecione para a página inicial ao fazer logout
+      this.$router.push("/");
     },
 
     closeModal() {
@@ -145,26 +146,29 @@ export default {
       this.registerErrorMessage = null;
     },
     async handleLogin() {
-  try {
-    const response = await fetch("http://localhost:8081/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: this.email, senha: this.password }),
-    });
+      try {
+        const response = await fetch("http://localhost:8081/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: this.email, senha: this.password }),
+        });
 
-    if (response.ok) {
-      const data = await response.json();
-      this.isLoggedIn = true; // Define como logado
-      this.closeModal(); // Fecha o modal de login
-    } else {
-      const errorData = await response.json();
-      this.errorMessage = errorData.message || "Erro no login.";
-    }
-   } catch (error) {
-    this.errorMessage = "Erro ao conectar ao servidor.";
-    console.error(error);
-   }
-  },
+        if (response.ok) {
+          const data = await response.json();
+          this.isLoggedIn = true; // Define como logado
+          this.closeModal(); // Fecha o modal de login
+
+          // Redireciona para a Dashboard
+          this.$router.push("/dashboard");
+        } else {
+          const errorData = await response.json();
+          this.errorMessage = errorData.message || "Erro no login.";
+        }
+      } catch (error) {
+        this.errorMessage = "Erro ao conectar ao servidor.";
+        console.error(error);
+      }
+    },
     async handleRegister() {
       try {
         const response = await fetch("http://localhost:8081/register", {
@@ -190,9 +194,10 @@ export default {
         console.error(error);
       }
     },
-  }, // Fim correto do objeto methods
+  },
 };
 </script>
+
 
 <style scoped>
 /* Navbar Geral */
