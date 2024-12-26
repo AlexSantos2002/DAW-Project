@@ -8,15 +8,15 @@ const EMAIL_PORT = 587;
 const transporter = nodemailer.createTransport({
   host: EMAIL_HOST,
   port: EMAIL_PORT,
-  secure: false,
+  secure: false, // Deve ser false para STARTTLS
   auth: {
     user: EMAIL_USER,
     pass: EMAIL_PASS,
   },
-  logger: true,
-  debug: true,
+  // Removido logger e debug para evitar logs desnecessários
 });
 
+// Verifica a configuração do transporte SMTP
 transporter.verify((error, success) => {
   if (error) {
     console.error('Erro ao conectar ao servidor SMTP:', error.message);
@@ -31,28 +31,28 @@ export async function sendEmail(
   text: string
 ): Promise<void> {
   try {
+    // Mensagem simples no início do envio
     console.log('Iniciando envio de e-mail...');
-    console.log(`Para: ${to}`);
-    console.log(`Assunto: ${subject}`);
-    console.log(`Corpo: ${text}`);
 
     const info = await transporter.sendMail({
-      from: `"Fitness Hub" <${EMAIL_USER}>`,
+      from: `"Fitness Hub" <${EMAIL_USER}>`, // Nome exibido no e-mail
       to,
       subject,
       text,
       headers: {
-        'X-Priority': '3',
-        'X-Mailer': 'Nodemailer',
+        'X-Priority': '3', // Prioridade normal
+        'X-Mailer': 'Nodemailer', // Identificação do cliente
       },
     });
 
-    console.log('E-mail enviado com sucesso:', info);
+    // Mensagem apenas de sucesso
+    console.log('E-mail enviado com sucesso:', info.messageId);
   } catch (error: unknown) {
+    // Mensagem de erro simplificada
     if (error instanceof Error) {
       console.error('Erro ao enviar o e-mail:', error.message);
     } else {
-      console.error('Erro desconhecido ao enviar o e-mail:', error);
+      console.error('Erro desconhecido ao enviar o e-mail.');
     }
     throw error;
   }
