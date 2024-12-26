@@ -31,3 +31,4 @@ Ou seja curl -X DELETE http://localhost:8081/usuarios/ID
 Exemplo de comando para listar todos os usuarios:
 curl -X GET http://localhost:8081/usuarios
 ----------------------------------------------------------------------------------------------
+Quase feito
