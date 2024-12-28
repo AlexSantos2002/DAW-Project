@@ -3,10 +3,6 @@
     <div class="hero-section">
       <h1>Bem-vindo ao Fitness Hub!</h1>
       <p>Seu parceiro na jornada para uma vida saudável e equilibrada.</p>
-      <div class="buttons">
-        <button class="btn start-btn">Comece Agora</button>
-        <button class="btn learn-btn">Saiba Mais</button>
-      </div>
     </div>
 
     <div class="features-section">
