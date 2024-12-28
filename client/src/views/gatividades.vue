@@ -1,5 +1,8 @@
 <template>
   <div class="group-activities">
+    <!-- Botão para voltar para a dashboard -->
+    <button @click="goToDashboard" class="dashboard-btn">Voltar à Dashboard</button>
+
     <h1>Atividades em Grupo</h1>
     <form @submit.prevent="createGroup" class="group-form">
       <input
@@ -82,25 +85,25 @@ export default {
       }
     },
     async joinGroup() {
-  try {
-    const usuario_id = localStorage.getItem("usuario_id");
-    if (!usuario_id) {
-      alert("Erro: Usuário não identificado.");
-      return;
-    }
+      try {
+        const usuario_id = localStorage.getItem("usuario_id");
+        if (!usuario_id) {
+          alert("Erro: Usuário não identificado.");
+          return;
+        }
 
-    const response = await axios.post("http://localhost:8081/grupos/entrar", {
-      nome: this.groupToJoin,
-      usuario_id,
-    });
-    alert(response.data.message || "Você entrou no grupo com sucesso!");
-    this.groupToJoin = ""; // Limpa o campo após o sucesso
-    this.loadGroups(); // Atualiza a lista de grupos
-  } catch (error) {
-    console.error("Erro ao entrar no grupo:", error.response || error.message);
-    alert(error.response?.data?.message || "Erro ao entrar no grupo. Tente novamente.");
-  }
-},
+        const response = await axios.post("http://localhost:8081/grupos/entrar", {
+          nome: this.groupToJoin,
+          usuario_id,
+        });
+        alert(response.data.message || "Você entrou no grupo com sucesso!");
+        this.groupToJoin = ""; // Limpa o campo após o sucesso
+        this.loadGroups(); // Atualiza a lista de grupos
+      } catch (error) {
+        console.error("Erro ao entrar no grupo:", error.response || error.message);
+        alert(error.response?.data?.message || "Erro ao entrar no grupo. Tente novamente.");
+      }
+    },
     async loadGroups() {
       try {
         const response = await axios.get("http://localhost:8081/grupos");
@@ -120,6 +123,9 @@ export default {
         alert("Erro ao remover grupo. Tente novamente.");
       }
     },
+    goToDashboard() {
+      this.$router.push("/dashboard"); // Navega para a rota da dashboard
+    },
   },
   mounted() {
     this.loadGroups(); // Carrega os grupos ao montar o componente
@@ -131,6 +137,21 @@ export default {
 .group-activities {
   padding: 2rem;
   text-align: center;
+}
+
+.dashboard-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.dashboard-btn:hover {
+  background-color: #45a049;
 }
 
 .group-form {
