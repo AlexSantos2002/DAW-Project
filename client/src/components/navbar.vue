@@ -111,6 +111,7 @@ export default {
   data() {
     return {
       isLoggedIn: false, // Estado de login
+      loggedInUserName: "", // Nome do usuário logado
       showLoginModal: false,
       showRegisterModal: false, // Adicionado para o modal de registro
       email: "",
@@ -125,12 +126,24 @@ export default {
   },
   methods: {
     logout() {
-      this.isLoggedIn = false;
-      this.userName = "";
-      // Opcionalmente, redirecione para a página inicial ao fazer logout
-      this.$router.push("/");
+  this.isLoggedIn = false;
+  this.loggedInUserName = "";
+  localStorage.removeItem("usuario_id"); // Remove o ID do usuário ao sair
+  localStorage.removeItem("usuario_nome");
+  this.$router.push("/"); // Redireciona para a página inicial
     },
+    mounted() {
+  const usuario_id = localStorage.getItem("usuario_id");
+  const usuario_nome = localStorage.getItem("usuario_nome");
 
+  if (usuario_id) {
+    this.isLoggedIn = true;
+    this.loggedInUserName = usuario_nome;
+
+    // Redireciona para a Dashboard se já estiver logado
+    this.$router.push("/dashboard");
+  }
+},
     closeModal() {
       this.showLoginModal = false;
       this.email = "";
@@ -146,29 +159,33 @@ export default {
       this.registerErrorMessage = null;
     },
     async handleLogin() {
-      try {
-        const response = await fetch("http://localhost:8081/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: this.email, senha: this.password }),
-        });
+  try {
+    const response = await fetch("http://localhost:8081/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: this.email, senha: this.password }),
+    });
 
-        if (response.ok) {
-          const data = await response.json();
-          this.isLoggedIn = true; // Define como logado
-          this.closeModal(); // Fecha o modal de login
+    if (response.ok) {
+      const data = await response.json();
+      this.isLoggedIn = true;
+      this.loggedInUserName = data.nome; // Define o nome do usuário logado
+      localStorage.setItem("usuario_id", data.usuario_id); // Salva o ID do usuário
+      localStorage.setItem("usuario_nome", data.nome); // Salva o nome do usuário
 
-          // Redireciona para a Dashboard
-          this.$router.push("/dashboard");
-        } else {
-          const errorData = await response.json();
-          this.errorMessage = errorData.message || "Erro no login.";
-        }
-      } catch (error) {
-        this.errorMessage = "Erro ao conectar ao servidor.";
-        console.error(error);
-      }
-    },
+      this.closeModal(); // Fecha o modal de login
+
+      // Redireciona para a Dashboard
+      this.$router.push("/dashboard");
+    } else {
+      const errorData = await response.json();
+      this.errorMessage = errorData.message || "Erro no login.";
+    }
+  } catch (error) {
+    this.errorMessage = "Erro ao conectar ao servidor.";
+    console.error(error);
+  }
+   },
     async handleRegister() {
       try {
         const response = await fetch("http://localhost:8081/register", {
