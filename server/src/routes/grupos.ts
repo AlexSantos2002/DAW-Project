@@ -10,7 +10,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
     console.error("Erro ao conectar ao banco de dados SQLite:", err.message);
   } else {
-    console.log("Conectado ao banco de dados SQLite.");
+    console.log("Conectado ao banco de dados SQLite para grupos.");
     // Cria a tabela de grupos se ela não existir
     db.run(`
       CREATE TABLE IF NOT EXISTS grupos (
