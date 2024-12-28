@@ -1,10 +1,13 @@
 <template>
+  <!-- Estrutura principal da página inicial -->
   <div class="home">
+    <!-- Seção Hero: Mensagem principal de boas-vindas -->
     <div class="hero-section">
       <h1>Bem-vindo ao Fitness Hub!</h1>
       <p>Seu parceiro na jornada para uma vida saudável e equilibrada.</p>
     </div>
 
+    <!-- Seção de Recursos: Destaques do que o Fitness Hub oferece -->
     <div class="features-section">
       <div class="feature">
         <h3>Programas Personalizados</h3>
@@ -20,11 +23,12 @@
       </div>
     </div>
 
-    <!-- Seção de Depoimentos -->
+    <!-- Seção de Depoimentos: Histórias de sucesso dos usuários -->
     <div class="testimonials-section">
       <h2>Histórias de Sucesso</h2>
       <p>Veja o que nossos membros têm a dizer.</p>
       <div class="testimonials">
+        <!-- Depoimento 1 -->
         <div class="testimonial">
           <p>
             "O Fitness Hub mudou minha vida! Perdi 10kg em 3 meses e ganhei mais
@@ -32,6 +36,7 @@
           </p>
           <span>- João Silva</span>
         </div>
+        <!-- Depoimento 2 -->
         <div class="testimonial">
           <p>
             "A plataforma é incrível! Os treinos personalizados e a comunidade
@@ -39,6 +44,7 @@
           </p>
           <span>- Maria Oliveira</span>
         </div>
+        <!-- Depoimento 3 -->
         <div class="testimonial">
           <p>
             "Finalmente encontrei um lugar onde consigo monitorar meu progresso
@@ -53,12 +59,13 @@
 
 <script>
 export default {
+  // Nome do componente principal
   name: "home",
 };
 </script>
 
 <style scoped>
-/* Seção Hero */
+/* Seção Hero: Estilo para a mensagem principal */
 .hero-section {
   text-align: center;
   padding: 2rem;
@@ -80,6 +87,7 @@ export default {
   margin-bottom: 2rem;
 }
 
+/* Botões de ação (opcional, caso adicionados) */
 .buttons {
   display: flex;
   justify-content: center;
@@ -115,7 +123,7 @@ export default {
   transform: scale(1.05);
 }
 
-/* Seção de Recursos */
+/* Seção de Recursos: Estilo para os destaques */
 .features-section {
   display: flex;
   justify-content: space-between;
@@ -150,7 +158,7 @@ export default {
   padding: 2rem 2rem;
   background-color: #f9f9f9;
   color: #2c3e50;
-  margin-top: -2rem; /* Ajusta a posição para preencher o buraco */
+  margin-top: -2rem; /* Ajusta a posição para preencher o espaço */
 }
 
 .testimonials-section h2 {
@@ -167,7 +175,7 @@ export default {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
-  flex-wrap: wrap; /* Responsivo */
+  flex-wrap: wrap; /* Torna a seção responsiva */
 }
 
 .testimonial {

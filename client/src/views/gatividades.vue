@@ -1,34 +1,45 @@
 <template>
+  <!-- Estrutura principal da página de Atividades em Grupo -->
   <div class="group-activities">
     <!-- Botão para voltar para a dashboard -->
     <button @click="goToDashboard" class="dashboard-btn">Voltar à Dashboard</button>
 
+    <!-- Título da página -->
     <h1>Atividades em Grupo</h1>
+
+    <!-- Formulário para criar um grupo -->
     <form @submit.prevent="createGroup" class="group-form">
+      <!-- Campo para o nome do grupo -->
       <input
         v-model="groupName"
         type="text"
         placeholder="Nome do Grupo"
         required
       />
+      <!-- Campo para a descrição do grupo (opcional) -->
       <input
         v-model="groupDescription"
         type="text"
         placeholder="Descrição do Grupo (opcional)"
       />
+      <!-- Botão para criar o grupo -->
       <button type="submit" class="create-btn">Criar Grupo</button>
     </form>
 
+    <!-- Formulário para entrar em um grupo existente -->
     <form @submit.prevent="joinGroup" class="group-form">
+      <!-- Campo para o nome do grupo -->
       <input
         v-model="groupToJoin"
         type="text"
         placeholder="Nome do Grupo para Entrar"
         required
       />
+      <!-- Botão para entrar no grupo -->
       <button type="submit" class="join-btn">Entrar no Grupo</button>
     </form>
 
+    <!-- Lista de grupos criados -->
     <div v-if="groups.length > 0" class="group-list">
       <h2>Grupos Criados</h2>
       <table class="styled-table">
@@ -41,11 +52,13 @@
           </tr>
         </thead>
         <tbody>
+          <!-- Itera sobre a lista de grupos para exibi-los -->
           <tr v-for="group in groups" :key="group.id">
             <td>{{ group.id }}</td>
             <td>{{ group.nome }}</td>
             <td>{{ group.descricao || "Sem descrição" }}</td>
             <td>
+              <!-- Botão para remover o grupo -->
               <button @click="removeGroup(group.id)" class="remove-btn">Remover</button>
             </td>
           </tr>
@@ -61,13 +74,14 @@ import axios from "axios";
 export default {
   data() {
     return {
-      groupName: "",
-      groupDescription: "",
-      groupToJoin: "",
-      groups: [],
+      groupName: "", // Nome do grupo a ser criado
+      groupDescription: "", // Descrição do grupo a ser criado
+      groupToJoin: "", // Nome do grupo para entrar
+      groups: [], // Lista de grupos carregados do backend
     };
   },
   methods: {
+    // Método para criar um grupo
     async createGroup() {
       try {
         const response = await axios.post("http://localhost:8081/grupos", {
@@ -84,6 +98,7 @@ export default {
         alert("Erro ao criar grupo. Tente novamente.");
       }
     },
+    // Método para entrar em um grupo existente
     async joinGroup() {
       try {
         const usuario_id = localStorage.getItem("usuario_id");
@@ -104,6 +119,7 @@ export default {
         alert(error.response?.data?.message || "Erro ao entrar no grupo. Tente novamente.");
       }
     },
+    // Método para carregar a lista de grupos do backend
     async loadGroups() {
       try {
         const response = await axios.get("http://localhost:8081/grupos");
@@ -113,32 +129,37 @@ export default {
         alert("Erro ao carregar grupos. Tente novamente.");
       }
     },
+    // Método para remover um grupo
     async removeGroup(id) {
       try {
         await axios.delete(`http://localhost:8081/grupos/${id}`);
-        this.groups = this.groups.filter((group) => group.id !== id);
+        this.groups = this.groups.filter((group) => group.id !== id); // Atualiza a lista
         alert("Grupo removido com sucesso!");
       } catch (error) {
         console.error("Erro ao remover grupo:", error.response || error.message);
         alert("Erro ao remover grupo. Tente novamente.");
       }
     },
+    // Método para redirecionar para a dashboard
     goToDashboard() {
-      this.$router.push("/dashboard"); // Navega para a rota da dashboard
+      this.$router.push("/dashboard");
     },
   },
+  // Carrega a lista de grupos ao montar o componente
   mounted() {
-    this.loadGroups(); // Carrega os grupos ao montar o componente
+    this.loadGroups();
   },
 };
 </script>
 
 <style scoped>
+/* Estilização geral da página */
 .group-activities {
   padding: 2rem;
   text-align: center;
 }
 
+/* Botão de voltar à dashboard */
 .dashboard-btn {
   background-color: #4CAF50;
   color: white;
@@ -154,6 +175,7 @@ export default {
   background-color: #45a049;
 }
 
+/* Estilo dos formulários */
 .group-form {
   display: flex;
   justify-content: center;
@@ -169,6 +191,7 @@ export default {
   border-radius: 5px;
 }
 
+/* Botão de criar grupo */
 .create-btn {
   background-color: #1abc9c;
   color: #fff;
@@ -180,6 +203,7 @@ export default {
   background-color: #16a085;
 }
 
+/* Botão de entrar no grupo */
 .join-btn {
   background-color: #3498db;
   color: #fff;
@@ -191,6 +215,7 @@ export default {
   background-color: #2980b9;
 }
 
+/* Lista de grupos */
 .group-list {
   margin-top: 2rem;
 }
@@ -224,6 +249,7 @@ export default {
   background-color: #f1f1f1;
 }
 
+/* Botão de remover grupo */
 .remove-btn {
   background-color: #e74c3c;
   color: #fff;
