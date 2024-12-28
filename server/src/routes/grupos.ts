@@ -68,7 +68,7 @@ router.post("/", (req: Request, res: Response) => {
 interface Group {
   id: number;
 }
-
+//entrar no grupo
 router.post("/entrar", (req: Request, res: Response) => {
   const { nome, usuario_id } = req.body;
 
