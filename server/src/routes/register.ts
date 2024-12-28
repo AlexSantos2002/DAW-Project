@@ -1,6 +1,7 @@
 import express, { Router, Request, Response } from "express";
 import sqlite3 from "sqlite3";
 import path from "path";
+import { validatePassword } from "../middlewares/validatePassword"; // Importa o middleware de validação de senha
 
 const router: Router = Router();
 
@@ -14,19 +15,12 @@ const db = new sqlite3.Database(dbPath, (err) => {
   }
 });
 
-// Rota de Registro
-router.post("/", (req: Request, res: Response): void => {
+// Rota de Registro com middleware de validação de senha
+router.post("/", validatePassword, (req: Request, res: Response): void => {
   const { nome, email, senha, tipo } = req.body;
-
   // Validações de campos obrigatórios
   if (!nome || !email || !senha || !tipo) {
     res.status(400).json({ message: "Todos os campos são obrigatórios." });
-    return;
-  }
-
-  // Validação de comprimento da senha
-  if (senha.length < 6) {
-    res.status(400).json({ message: "A senha deve ter pelo menos 6 caracteres." });
     return;
   }
 
