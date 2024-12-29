@@ -260,7 +260,7 @@ export default {
 .nav-links a {
   color: #ecf0f1;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 1.1rem;
   transition: color 0.3s;
   padding: 5px;
 }
