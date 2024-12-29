@@ -73,7 +73,7 @@ export default {
           body: JSON.stringify({
             to: this.email, // E-mail do destinatário
             subject: 'Interesse em instalações físicas', // Assunto do e-mail
-            text: 'Bem vindo ao Fitness Hub! Para utilizar das nossas instalações físicas, basta se deslocar até nós para efetuar a reserva! Ficamos à sua espera!', // Corpo do e-mail
+            text: 'Bem vindo ao Fitness Hub! Para utilizar as nossas instalações físicas, basta te deslocares até nós para efetuar a reserva! Ficamos à tua espera!', // Corpo do e-mail
           }),
         });
 
