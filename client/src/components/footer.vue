@@ -29,7 +29,7 @@ export default {
 
 /* Estilo principal do rodapé */
 .footer {
-  background-color: #2c3e50; /* Cor de fundo */
+  background-color: #212121; /* Cor de fundo */
   color: #ecf0f1; /* Cor do texto */
   text-align: center;
   padding: 1rem; /* Espaçamento interno */
@@ -58,13 +58,13 @@ export default {
 
 /* Estilo dos links no rodapé */
 .footer-links a {
-  color: #1abc9c; /* Cor do link */
+  color: #FF1744; /* Cor do link */
   text-decoration: none; /* Remove o sublinhado */
   font-size: 0.9rem; /* Tamanho da fonte */
 }
 
 /* Estilo ao passar o mouse sobre os links */
 .footer-links a:hover {
-  color: #16a085; /* Cor de destaque ao passar o rato */
+  color: #B71C1C; /* Cor de destaque ao passar o rato */
 }
 </style>

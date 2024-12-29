@@ -18,7 +18,7 @@
         v-if="isCorrida"
         v-model.number="quilometros"
         type="number"
-        placeholder="Quilômetros"
+        placeholder="Quilómetros"
         required
       />
       <!-- Campo para repetições (exibido para outros exercícios) -->
@@ -180,7 +180,7 @@ export default {
 }
 
 .back-btn {
-  background-color: #1abc9c;
+  background-color: #B71C1C;
   color: #fff;
   padding: 10px 15px;
   border: none;
@@ -191,7 +191,7 @@ export default {
 }
 
 .back-btn:hover {
-  background-color: #16a085;
+  background-color: #FF1744;
 }
 
 /* Estilo do formulário */
@@ -211,7 +211,7 @@ export default {
 }
 
 .add-btn {
-  background-color: #3498db;
+  background-color: #1565C0;
   color: white;
   border: none;
   cursor: pointer;
@@ -232,7 +232,7 @@ export default {
 }
 
 .styled-table thead tr {
-  background-color: #007bff;
+  background-color: #1565C0;
   color: #ffffff;
   text-align: center;
   font-weight: bold;

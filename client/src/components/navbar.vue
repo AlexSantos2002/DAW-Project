@@ -15,11 +15,11 @@
   </template>
   <template v-else>
     <button class="btn login-btn" @click="showLoginModal = true">Login</button>
-    <button class="btn register-btn" @click="showRegisterModal = true">Registrar</button>
+    <button class="btn register-btn" @click="showRegisterModal = true">Registar</button>
   </template>
 </div>
 
-<!-- Modal de Registro -->
+<!-- Modal de Registo -->
 <div v-if="showRegisterModal" class="modal-overlay" @click.self="closeRegisterModal">
   <div class="modal-content">
     <h2>Registrar</h2>
@@ -30,7 +30,7 @@
           type="text"
           id="name"
           v-model="registerName"
-          placeholder="Digite seu nome"
+          placeholder="Digite o seu nome"
           required
         />
       </div>
@@ -40,7 +40,7 @@
           type="email"
           id="register-email"
           v-model="registerEmail"
-          placeholder="Digite seu email"
+          placeholder="Digite o seu email"
           required
         />
       </div>
@@ -62,7 +62,7 @@
         </select>
       </div>
       <div class="popup-buttons">
-        <button type="submit" class="btn register-modal-btn">Registrar</button>
+        <button type="submit" class="btn register-modal-btn">Registar</button>
         <button type="button" class="btn cancel-modal-btn" @click="closeRegisterModal">Cancelar</button>
       </div>
     </form>
@@ -222,10 +222,16 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background-color: #2c3e50;
+  padding: 2rem 2rem;
+  background-color: #212121;
   color: #ecf0f1;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  position: sticky; /* Fixa a barra no topo da página */
+  width: 100%;
+  box-sizing: border-box;
+  top: 0; /* Fixa no topo */
+  left: 0; /* Fixa à esquerda */
 }
 
 /* Logo */
@@ -234,17 +240,19 @@ export default {
   font-weight: bold;
   color: #ecf0f1;
   text-decoration: none;
+  padding:10px;
 }
 
 .logo a:hover {
-  color: #1abc9c;
+  background-color: #B71C1C;
+  color:black;
 }
 
 /* Links de Navegação */
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 1.5rem;
+  gap: 2.5rem;
   margin: 0;
   padding: 0;
 }
@@ -254,13 +262,15 @@ export default {
   text-decoration: none;
   font-size: 1rem;
   transition: color 0.3s;
+  padding: 5px;
 }
 
 .nav-links a:hover {
-  color: #1abc9c;
+  background-color: #B71C1C;
+  color:black;
 }
 
-/* Botões de Login e Registro */
+/* Botões de Login e Registo */
 .auth-buttons {
   display: flex;
   gap: 1rem;
@@ -277,22 +287,22 @@ export default {
 
 /* Estilo do Botão de Login */
 .login-btn {
-  background-color: #3498db;
+  background-color: #B71C1C;
   color: #fff;
 }
 
 .login-btn:hover {
-  background-color: #2980b9;
+  background-color: #FF1744;
 }
 
 /* Estilo do Botão de Registro */
 .register-btn {
-  background-color: #1abc9c;
+  background-color: #B71C1C;
   color: #fff;
 }
 
 .register-btn:hover {
-  background-color: #16a085;
+  background-color: #FF1744;
 }
 
 /* Modal Overlay */
@@ -311,7 +321,7 @@ export default {
 
 /* Modal Content */
 .modal-content {
-  background: #fff;
+  background: white;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -329,6 +339,7 @@ export default {
 .form-group {
   margin-bottom: 1rem;
   text-align: left;
+  color:black;
 }
 
 .form-group label {
@@ -362,12 +373,12 @@ export default {
 
 /* Estilo do Botão Entrar */
 .login-modal-btn {
-  background-color: #3498db; /* Azul */
+  background-color:#7CB342; 
   color: #fff;
 }
 
 .login-modal-btn:hover {
-  background-color: #2980b9;
+  background-color: #33691E;
 }
 
 /* Estilo do Botão Cancelar */
@@ -393,12 +404,12 @@ export default {
 
 /* Botão de logout */
 .logout-btn {
-  background-color: #e74c3c;
+  background-color: #B71C1C;
   color: #fff;
 }
 
 .logout-btn:hover {
-  background-color: #c0392b;
+  background-color: #FF1744;
 }
 
 </style>

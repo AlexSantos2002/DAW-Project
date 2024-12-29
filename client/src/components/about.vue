@@ -6,11 +6,11 @@
     <!-- Descrição do propósito da Fitness Hub -->
     <p>
       Bem-vindo à Fitness Hub! Somos dedicados a fornecer as melhores soluções de fitness e nutrição 
-      para ajudar-te a atingir seus objetivos de saúde e bem-estar.
+      para ajudar-te a atingir os teus objetivos de saúde e bem-estar.
     </p>
     <!-- Informação adicional sobre a equipe -->
     <p>
-      Nossa equipe é composta por especialistas apaixonados por ajudar-te a viver de forma mais saudável.
+      A nossa equipa é composta por especialistas apaixonados por ajudar-te a viver de forma mais saudável.
     </p>
   </div>
 </template>
@@ -32,9 +32,9 @@ export default {
 
 /* Estilo do título */
 .about-component h2 {
-  font-size: 2rem; /* Tamanho da fonte */
+  font-size: 3.5rem; /* Tamanho da fonte */
   color: #2c3e50; /* Cor do texto */
-  margin-bottom: 1rem; /* Espaçamento inferior */
+  margin-bottom: 3rem; /* Espaçamento inferior */
 }
 
 /* Estilo dos parágrafos */

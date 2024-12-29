@@ -161,7 +161,7 @@ export default {
 
 /* Botão de voltar à dashboard */
 .dashboard-btn {
-  background-color: #4CAF50;
+  background-color: #B71C1C;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -172,7 +172,7 @@ export default {
 }
 
 .dashboard-btn:hover {
-  background-color: #45a049;
+  background-color: #FF1744;
 }
 
 /* Estilo dos formulários */
@@ -193,19 +193,19 @@ export default {
 
 /* Botão de criar grupo */
 .create-btn {
-  background-color: #1abc9c;
+  background-color: #2980b9;
   color: #fff;
   border: none;
   cursor: pointer;
 }
 
 .create-btn:hover {
-  background-color: #16a085;
+  background-color: #1565C0;
 }
 
 /* Botão de entrar no grupo */
 .join-btn {
-  background-color: #3498db;
+  background-color: #1565C0;
   color: #fff;
   border: none;
   cursor: pointer;
@@ -229,7 +229,7 @@ export default {
 }
 
 .styled-table thead tr {
-  background-color: #007bff;
+  background-color: #1565C0;
   color: #ffffff;
   text-align: center;
   font-weight: bold;

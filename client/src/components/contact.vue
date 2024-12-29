@@ -2,21 +2,24 @@
   <!-- Bloco do template: Estrutura visual do componente -->
   <div class="contact-container">
     <!-- Título da seção de contato -->
-    <h2>Entre em Contato</h2>
+    <h2>Entra em Contato</h2>
     <!-- Texto introdutório -->
-    <p>Para mais informações, entre em contato conosco:</p>
+    <p>Para mais informações, entra em contato connosco:</p>
     <!-- Lista com detalhes de contato -->
     <ul>
       <li>Email: <a href="mailto:a71522@ualg.pt">a71522@ualg.pt</a></li>
       <li>Telefone: <a href="tel:+351936051611">(+351) 936051611</a></li>
-      <li>Endereço: Rua de Berlim, n79</li>
+      <li class="address">Endereço: Rua de Berlim, n79</li>
+
+      <li>Email: <a href="mailto:a75409@ualg.pt">a75409@ualg.pt</a></li>
+      <li>Telefone: <a href="tel:+351964289466">(+351) 964289466</a></li>
     </ul>
 
     <!-- Bloco de envio de mensagem -->
     <div class="contact-message">
       <!-- Explicação do propósito do formulário -->
       <p>
-        Quer utilizar as nossas instalações físicas? Então informe abaixo o seu e-mail e iremos entrar em contacto!
+        Queres utilizar as nossas instalações físicas? Então insere abaixo o teu e-mail e nós iremos entrar em contato!
       </p>
       <!-- Formulário de contato -->
       <form @submit.prevent="handleSubmit">
@@ -98,6 +101,13 @@ export default {
 <style scoped>
 /* Bloco de estilos: Estilização do componente */
 /* Estilo da seção principal */
+
+.address {
+  margin-top: 20px;
+  font-weight: bold;
+  text-decoration: underline;
+  margin-bottom: 20px!important;
+}
 .contact-container {
   text-align: center;
   padding: 2rem;
@@ -128,12 +138,12 @@ export default {
 
 /* Links para e-mail e telefone */
 .contact-container a {
-  color: #3498db;
+  color: #FF1744;
   text-decoration: none;
 }
 
 .contact-container a:hover {
-  color: #1abc9c;
+  color: #B71C1C;
 }
 
 /* Estilo da seção de mensagem */
@@ -162,7 +172,7 @@ export default {
 }
 
 .contact-message input:focus {
-  border-color: #3498db;
+  border-color: #B71C1C;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   outline: none;
 }
@@ -170,17 +180,18 @@ export default {
 /* Estilo do botão */
 .contact-message button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #B71C1C;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+  margin-left: 20px;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .contact-message button:hover {
-  background-color: #0056b3;
+  background-color: #FF1744;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 

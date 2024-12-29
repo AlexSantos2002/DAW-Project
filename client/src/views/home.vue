@@ -4,34 +4,34 @@
     <!-- Seção Hero: Mensagem principal de boas-vindas -->
     <div class="hero-section">
       <h1>Bem-vindo ao Fitness Hub!</h1>
-      <p>Seu parceiro na jornada para uma vida saudável e equilibrada.</p>
+      <p>- o teu parceiro na jornada para uma vida saudável e equilibrada.</p>
     </div>
 
     <!-- Seção de Recursos: Destaques do que o Fitness Hub oferece -->
     <div class="features-section">
       <div class="feature">
         <h3>Programas Personalizados</h3>
-        <p>Obtenha recomendações de treino e dieta que se ajustam às suas necessidades.</p>
+        <p>Obtém recomendações de treino e dieta que se ajustam às tuas necessidades.</p>
       </div>
       <div class="feature">
         <h3>Monitoramento de Progresso</h3>
-        <p>Acompanhe seu desempenho e alcance seus objetivos de forma mais eficiente.</p>
+        <p>Acompanha o teu desempenho e alcança os teus objetivos de forma mais eficiente.</p>
       </div>
       <div class="feature">
         <h3>Comunidade Ativa</h3>
-        <p>Conecte-se com outros membros e receba suporte durante sua jornada.</p>
+        <p>Conecta-te com outros membros e recebe suporte durante a tua jornada.</p>
       </div>
     </div>
 
     <!-- Seção de Depoimentos: Histórias de sucesso dos usuários -->
     <div class="testimonials-section">
       <h2>Histórias de Sucesso</h2>
-      <p>Veja o que nossos membros têm a dizer.</p>
+      <p>Vê o que nossos membros têm a dizer:</p>
       <div class="testimonials">
         <!-- Depoimento 1 -->
         <div class="testimonial">
           <p>
-            "O Fitness Hub mudou minha vida! Perdi 10kg em 3 meses e ganhei mais
+            "O Fitness Hub mudou a minha vida! Perdi 10kg em 3 meses e ganhei mais
             confiança em mim mesmo."
           </p>
           <span>- João Silva</span>
@@ -40,14 +40,14 @@
         <div class="testimonial">
           <p>
             "A plataforma é incrível! Os treinos personalizados e a comunidade
-            me mantêm motivada todos os dias."
+            mantêm-me motivada todos os dias."
           </p>
           <span>- Maria Oliveira</span>
         </div>
         <!-- Depoimento 3 -->
         <div class="testimonial">
           <p>
-            "Finalmente encontrei um lugar onde consigo monitorar meu progresso
+            "Finalmente encontrei um lugar onde consigo monitorar o meu progresso
             e ver resultados reais!"
           </p>
           <span>- Pedro Santos</span>
@@ -69,10 +69,10 @@ export default {
 .hero-section {
   text-align: center;
   padding: 2rem;
-  background-color: #ecf0f1;
+  background-color: #EEEEEE;
   color: #2c3e50;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0px 26px rgba(0, 0, 0, 0.3);
   margin: 2rem auto;
   max-width: 800px;
 }
@@ -138,7 +138,7 @@ export default {
   text-align: center;
   padding: 1.5rem;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   flex: 1;
 }
 

@@ -2,8 +2,8 @@
   <!-- Bloco do template: Estrutura visual do componente -->
   <div class="dashboard">
     <!-- Título da Dashboard -->
-    <h1>Bem-vindo à sua Dashboard</h1>
-    <p>Precisa de ajuda nutricional? Consulte os nossos especialistas abaixo!</p>
+    <h1>Bem-vindo à tua Dashboard</h1>
+    <p>Precisas de ajuda nutricional? Consulta os nossos especialistas abaixo!</p>
 
     <!-- Botões para navegação -->
     <div class="activity-buttons">
@@ -95,7 +95,7 @@ export default {
 }
 
 .activity-button {
-  background-color: #1abc9c;
+  background-color: #B71C1C;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -106,12 +106,12 @@ export default {
 }
 
 .activity-button:hover {
-  background-color: #16a085;
+  background-color: #FF1744;
 }
 
 /* Botão para alternar a exibição dos nutricionistas */
 .nutritionists-button {
-  background-color: #3498db;
+  background-color: #1565C0;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -122,7 +122,7 @@ export default {
 }
 
 .nutritionists-button:hover {
-  background-color: #2980b9;
+  background-color: #42A5F5;
 }
 
 /* Estilo da lista de nutricionistas */

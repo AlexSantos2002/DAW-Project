@@ -13,6 +13,10 @@ const transporter = nodemailer.createTransport({
     user: EMAIL_USER,
     pass: EMAIL_PASS,
   },
+
+  tls: {
+    rejectUnauthorized: false // This line may help with self-signed certificates
+  }
   // Removido logger e debug para evitar logs desnecessários
 });
 
